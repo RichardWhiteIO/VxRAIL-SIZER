@@ -7,6 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery-2.2.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/main.js"></script>
@@ -20,13 +21,12 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-header">
+	<div class="navbar-header">
 		<a class="navbar-brand" href="#">VxRAIL<b>SIZER</b></a>
 		<ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="#">Home</a></li>
-		<li><a href="http://www.vce.com/products/hyper-converged/vxrail">Product Page</a></li>
-		<li><a href="https://myquotes.emc.com">MyQuotes</a></li> 
-		<li><a href="https://twitter.com/RichardWhiteIO">RichardWhiteIO</a></li>
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="http://www.vce.com/products/hyper-converged/vxrail">Product Page</a></li>
+			<li><a href="https://myquotes.emc.com">MyQuotes</a></li> 
 		</ul>
 	</div>
 </nav>
@@ -41,9 +41,9 @@
 	
 <!-- Disclaimer - Unofficial Tool -->
 <div class ="row">
-	<div class="alert alert-danger col-lg-12" id="disclaimer" style="text-align:center;">
-		Not an official EMC tool. Please send any feedback to <a href="mailto:richard.white@emc.com">Richard.White@emc.com</a>.
-		<button type="button" class="btn btn-primary" id="btnDisclaimer">OK</button>
+	<div id="disclaimer" class="alert alert-danger col-lg-12" style="text-align:center;">
+		Not an official EMC tool. Please send any feedback to <a href="mailto:devops.dallas@emc.com">dallas.devops@emc.com</a>.
+		<button id="btnDisclaimer" type="button" class="btn btn-primary">OK</button>
 	</div>
 </div>
 
@@ -62,27 +62,27 @@
 <!-- Cluster Type / Protection / Ratio -->	
 <div class="row well well-sm">
 	<div class="col-lg-3">
-		<button type="button" class="btn btn-primary" id="btnStartHelp">Tutorial</button>
+		<button id="btnStartHelp" type="button" class="btn btn-primary">Tutorial</button>
 	</div>
 	<div class="col-lg-3"> 
 		Cluster Type			
 		<div class="btn-group" data-toggle="buttons">
-			<a class="btn btn-default" id="radCluster1"><input type="radio" value="1">Hybrid</input></a>
-			<a class="btn btn-default" id="radCluster2"><input type="radio" value="2">All-Flash</input></a>
+			<a id="radCluster1" class="btn btn-default"><input type="radio" value="1">Hybrid</input></a>
+			<a id="radCluster2" class="btn btn-default"><input type="radio" value="2">All-Flash</input></a>
 		</div>
 	</div>
-	<div class="col-lg-3" style="display:none" id="divProtection">
+	<div id="divProtection" class="col-lg-3" style="display:none">
 		Protection
 		<div class="btn-group" data-toggle="buttons">
-			<a class="btn btn-default" id="radProtection1"><input type="radio" value="1">Mirrored</input></a>
-			<a class="btn btn-default" id="radProtection2"><input type="radio" value="2">Erasure</input></a>
+			<a id="radProtection1" class="btn btn-default"><input type="radio" value="1">Mirrored</input></a>
+			<a id="radProtection2" class="btn btn-default"><input type="radio" value="2">Erasure</input></a>
 		</div>
 	</div>
 </div>
 
 <!-- Configuration Header -->
 <div class="row">
-	<div class="col-lg-12" style="display:none" id="divConfiguration">
+	<div id="divConfiguration" class="col-lg-12" style="display:none">
 		<h1>Configuration</h1>
 	</div>
 </div>
@@ -98,10 +98,10 @@
 </div>
 
 <!-- Configuration Body -->
-<div class="row">
+<div id="hardwarePane" class="row">
 
 <!-- Panel 1 Heading -->
-<div class="col-lg-3" style="display:none" id="divPanel1">
+<div class="col-lg-3 divPanel1" style="display:none">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span id="panelATitle">Appliance Details</span>
@@ -109,8 +109,8 @@
 			<span id="panelATitle120" style="display:none">VxRAIL 120</span>
 			<span id="panelATitle160" style="display:none">VxRAIL 160</span>
 			<span id="panelATitle200" style="display:none">VxRAIL 200</span>
-			<a class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;" id="minusPanel1"></a>
-			<a class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;" id="plusPanel1"></a>
+			<a id="minusPanel1" class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;"></a>
+			<a id="plusPanel1" class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;"></a>
 		</div>
 
 <!-- Panel 1 Body -->
@@ -121,10 +121,10 @@
 	<div id="divModelA">
 		Model<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnModel60A"><input type="radio" value="60">60</input></a>
-			<a class="btn btn-default" id="btnModel120A"><input type="radio" value="120">120</input></a>
-			<a class="btn btn-default" id="btnModel160A"><input type="radio" value="160">160</input></a>
-			<a class="btn btn-default" id="btnModel200A"><input type="radio" value="200">200</input></a>
+			<a id="btnModel60A" class="btn btn-default"><input type="radio" value="60">60</input></a>
+			<a id="btnModel120A" class="btn btn-default"><input type="radio" value="120">120</input></a>
+			<a id="btnModel160A" class="btn btn-default"><input type="radio" value="160">160</input></a>
+			<a id="btnModel200A" class="btn btn-default"><input type="radio" value="200">200</input></a>
 		</div>
 		<div id="help5" style="display:none;" width="100%">
 			<span style="color:red;  font-weight:bold;">5. Model selection determines selectable memory/disk packs.</span>
@@ -137,11 +137,11 @@
 	<div id="divMemoryA" style="display:none;">
 		Memory (GB)<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnMemory64A"><input type="radio" value="64">64</input></a>
-			<a class="btn btn-default" id="btnMemory128A"><input type="radio" value="128">128</input></a>
-			<a class="btn btn-default" id="btnMemory192A"><input type="radio" value="192">192</input></a>
-			<a class="btn btn-default" id="btnMemory256A"><input type="radio" value="256">256</input></a>
-			<a class="btn btn-default" id="btnMemory512A"><input type="radio" value="512">512</input></a>
+			<a id="btnMemory64A" class="btn btn-default"><input type="radio" value="64">64</input></a>
+			<a id="btnMemory128A" class="btn btn-default"><input type="radio" value="128">128</input></a>
+			<a id="btnMemory192A" class="btn btn-default"><input type="radio" value="192">192</input></a>
+			<a id="btnMemory256A" class="btn btn-default"><input type="radio" value="256">256</input></a>
+			<a id="btnMemory512A" class="btn btn-default"><input type="radio" value="512">512</input></a>
 		</div>
 	</div>
 </p>
@@ -151,12 +151,12 @@
 	<div id="divDiskA" style="display:none;">
 	Disk Pack<br />
 		<div class="btn-group btn-group-vertical" data-toggle="buttons" style="width:100%">
-			<a class="btn btn-default" id="btnDisk1A"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk2A"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk3A"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk4A"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk5A"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk6A"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk1A" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk2A" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk3A" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk4A" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk5A" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk6A" class="btn btn-default"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
 		</div>
 	</div>
 </p>
@@ -165,13 +165,13 @@
 <p>
 	<div id="divQuantityA" style="display:none;">
 		Quantity<br />
-		<input type="number" min="0" max="16" style="width:100%" id="fldQuantityA" value="0"></input>
+		<input id="fldQuantityA" type="number" min="0" max="16" style="width:100%" value="0"></input>
 	</div>
 </p>
 </div></div></div>
 
 <!-- Panel 2 Heading -->
-<div class="col-lg-3" style="display:none" id="divPanel2">
+<div id="divPanel2" class="col-lg-3" style="display:none">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span id="panelBTitle">Appliance Details</span>
@@ -179,8 +179,8 @@
 			<span id="panelBTitle120" style="display:none">VxRAIL 120</span>
 			<span id="panelBTitle160" style="display:none">VxRAIL 160</span>
 			<span id="panelBTitle200" style="display:none">VxRAIL 200</span>
-			<a class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;" id="minusPanel2"></a>
-			<a class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;" id="plusPanel2"></a>
+			<a id="minusPanel2" class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;"></a>
+			<a id="plusPanel2" class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;"></a>
 		</div>
 
 <!-- Panel 2 Body -->
@@ -191,10 +191,10 @@
 	<div id="divModelB">
 		Model<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnModel60B"><input type="radio" value="60">60</input></a>
-			<a class="btn btn-default" id="btnModel120B"><input type="radio" value="120">120</input></a>
-			<a class="btn btn-default" id="btnModel160B"><input type="radio" value="160">160</input></a>
-			<a class="btn btn-default" id="btnModel200B"><input type="radio" value="200">200</input></a>
+			<a id="btnModel60B" class="btn btn-default"><input type="radio" value="60">60</input></a>
+			<a id="btnModel120B" class="btn btn-default"><input type="radio" value="120">120</input></a>
+			<a id="btnModel160B" class="btn btn-default"><input type="radio" value="160">160</input></a>
+			<a id="btnModel200B" class="btn btn-default"><input type="radio" value="200">200</input></a>
 		</div>
 	</div>
 </p>
@@ -204,11 +204,11 @@
 	<div id="divMemoryB" style="display:none;">
 		Memory (GB)<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnMemory64B"><input type="radio" value="64">64</input></a>
-			<a class="btn btn-default" id="btnMemory128B"><input type="radio" value="128">128</input></a>
-			<a class="btn btn-default" id="btnMemory192B"><input type="radio" value="192">192</input></a>
-			<a class="btn btn-default" id="btnMemory256B"><input type="radio" value="256">256</input></a>
-			<a class="btn btn-default" id="btnMemory512B"><input type="radio" value="512">512</input></a>
+			<a id="btnMemory64B" class="btn btn-default"><input type="radio" value="64">64</input></a>
+			<a id="btnMemory128B" class="btn btn-default"><input type="radio" value="128">128</input></a>
+			<a id="btnMemory192B" class="btn btn-default"><input type="radio" value="192">192</input></a>
+			<a id="btnMemory256B" class="btn btn-default"><input type="radio" value="256">256</input></a>
+			<a id="btnMemory512B" class="btn btn-default"><input type="radio" value="512">512</input></a>
 		</div>
 	</div>
 </p>
@@ -218,27 +218,27 @@
 	<div id="divDiskB" style="display:none;">
 		Disk Pack<br />
 		<div class="btn-group btn-group-vertical" data-toggle="buttons" style="width:100%">
-			<a class="btn btn-default" id="btnDisk1B"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk2B"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk3B"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk4B"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk5B"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk6B"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk1B" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk2B" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk3B" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk4B" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk5B" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk6B" class="btn btn-default"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
 		</div>
 	</div>
 </p>
 
 <!-- Panel 2 Quantity -->
 <p>
-	<div  id="divQuantityB" style="display:none;">
+	<div id="divQuantityB" style="display:none;">
 		Quantity<br />
-		<input type="number" min="0" max="16" style="width:100%" id="fldQuantityB" value="0"></input>
+		<input id="fldQuantityB" type="number" min="0" max="16" style="width:100%" value="0"></input>
 	</div>
 </p>
 </div></div></div>
 
 <!-- Panel 3 Heading -->
-<div class="col-lg-3" style="display:none" id="divPanel3">
+<div id="divPanel3" class="col-lg-3" style="display:none">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span id="panelCTitle">Appliance Details</span>
@@ -246,8 +246,8 @@
 			<span id="panelCTitle120" style="display:none">VxRAIL 120</span>
 			<span id="panelCTitle160" style="display:none">VxRAIL 160</span>
 			<span id="panelCTitle200" style="display:none">VxRAIL 200</span>
-			<a class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;" id="minusPanel3"></a>
-			<a class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;" id="plusPanel3"></a>
+			<a id="minusPanel3" class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;"></a>
+			<a id="plusPanel3" class="glyphicon glyphicon-plus" style="text-decoration:none; color:white; float:right;"></a>
 		</div>
 
 <!-- Panel 3 Body -->
@@ -258,10 +258,10 @@
 	<div id="divModelC">
 		Model<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnModel60C"><input type="radio" value="60">60</input></a>
-			<a class="btn btn-default" id="btnModel120C"><input type="radio" value="120">120</input></a>
-			<a class="btn btn-default" id="btnModel160C"><input type="radio" value="160">160</input></a>
-			<a class="btn btn-default" id="btnModel200C"><input type="radio" value="200">200</input></a>
+			<a id="btnModel60C" class="btn btn-default"><input type="radio" value="60">60</input></a>
+			<a id="btnModel120C" class="btn btn-default"><input type="radio" value="120">120</input></a>
+			<a id="btnModel160C" class="btn btn-default"><input type="radio" value="160">160</input></a>
+			<a id="btnModel200C" class="btn btn-default"><input type="radio" value="200">200</input></a>
 		</div>
 	</div>
 </p>
@@ -271,11 +271,11 @@
 	<div id="divMemoryC" style="display:none;">
 		Memory (GB)<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnMemory64C"><input type="radio" value="64">64</input></a>
-			<a class="btn btn-default" id="btnMemory128C"><input type="radio" value="128">128</input></a>
-			<a class="btn btn-default" id="btnMemory192C"><input type="radio" value="192">192</input></a>
-			<a class="btn btn-default" id="btnMemory256C"><input type="radio" value="256">256</input></a>
-			<a class="btn btn-default" id="btnMemory512C"><input type="radio" value="512">512</input></a>
+			<a id="btnMemory64C" class="btn btn-default"><input type="radio" value="64">64</input></a>
+			<a id="btnMemory128C" class="btn btn-default"><input type="radio" value="128">128</input></a>
+			<a id="btnMemory192C" class="btn btn-default"><input type="radio" value="192">192</input></a>
+			<a id="btnMemory256C" class="btn btn-default"><input type="radio" value="256">256</input></a>
+			<a id="btnMemory512C" class="btn btn-default"><input type="radio" value="512">512</input></a>
 		</div>
 	</div>
 </p>
@@ -285,12 +285,12 @@
 	<div id="divDiskC" style="display:none;">
 		Disk Pack<br />
 		<div class="btn-group btn-group-vertical" data-toggle="buttons" style="width:100%">
-			<a class="btn btn-default" id="btnDisk1C"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk2C"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk3C"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk4C"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk5C"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk6C"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk1C" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk2C" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk3C" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk4C" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk5C" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk6C" class="btn btn-default"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
 		</div>
 	</div>
 </p>
@@ -299,13 +299,13 @@
 <p>
 	<div id="divQuantityC" style="display:none;">
 		Quantity<br />
-		<input type="number" min="0" max="16" style="width:100%" id="fldQuantityC" value="0"></input>
+		<input id="fldQuantityC" type="number" min="0" max="16" style="width:100%" value="0"></input>
 	</div>
 </p>
 </div></div></div>
 
 <!-- Panel4 Heading -->
-<div class="col-lg-3" style="display:none" id="divPanel4">
+<div id="divPanel4" class="col-lg-3" style="display:none">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span id="panelDTitle">Appliance Details</span>
@@ -313,7 +313,7 @@
 			<span id="panelDTitle120" style="display:none">VxRAIL 120</span>
 			<span id="panelDTitle160" style="display:none">VxRAIL 160</span>
 			<span id="panelDTitle200" style="display:none">VxRAIL 200</span>
-			<a class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;" id="minusPanel4"></a>
+			<a id="minusPanel4" class="glyphicon glyphicon-minus" style="text-decoration:none; color:white; float:right;"></a>
 		</div>
 
 <!-- Panel 4 Body -->
@@ -324,10 +324,10 @@
 	<div id="divModelD">
 		Model<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnModel60D"><input type="radio" value="60">60</input></a>
-			<a class="btn btn-default" id="btnModel120D"><input type="radio" value="120">120</input></a>
-			<a class="btn btn-default" id="btnModel160D"><input type="radio" value="160">160</input></a>
-			<a class="btn btn-default" id="btnModel200D"><input type="radio" value="200">200</input></a>
+			<a id="btnModel60D" class="btn btn-default"><input type="radio" value="60">60</input></a>
+			<a id="btnModel120D" class="btn btn-default"><input type="radio" value="120">120</input></a>
+			<a id="btnModel160D" class="btn btn-default"><input type="radio" value="160">160</input></a>
+			<a id="btnModel200D" class="btn btn-default"><input type="radio" value="200">200</input></a>
 		</div>
 	</div>
 </p>
@@ -337,11 +337,11 @@
 	<div id="divMemoryD" style="display:none;">
 		Memory (GB)<br />
 		<div class="btn-group btn-group-justified" data-toggle="buttons">
-			<a class="btn btn-default" id="btnMemory64D"><input type="radio" value="64">64</input></a>
-			<a class="btn btn-default" id="btnMemory128D"><input type="radio" value="128">128</input></a>
-			<a class="btn btn-default" id="btnMemory192D"><input type="radio" value="192">192</input></a>
-			<a class="btn btn-default" id="btnMemory256D"><input type="radio" value="256">256</input></a>
-			<a class="btn btn-default" id="btnMemory512D"><input type="radio" value="512">512</input></a>
+			<a id="btnMemory64D" class="btn btn-default"><input type="radio" value="64">64</input></a>
+			<a id="btnMemory128D" class="btn btn-default"><input type="radio" value="128">128</input></a>
+			<a id="btnMemory192D" class="btn btn-default"><input type="radio" value="192">192</input></a>
+			<a id="btnMemory256D" class="btn btn-default"><input type="radio" value="256">256</input></a>
+			<a id="btnMemory512D" class="btn btn-default"><input type="radio" value="512">512</input></a>
 		</div>
 	</div>
 </p>
@@ -352,12 +352,12 @@
 	<div id="divDiskD" style="display:none;">
 		Disk Pack<br />
 		<div class="btn-group btn-group-vertical" data-toggle="buttons" style="width:100%">
-			<a class="btn btn-default" id="btnDisk1D"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk2D"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk3D"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk4D"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk5D"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
-			<a class="btn btn-default" id="btnDisk6D"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk1D" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk2D" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 3x1.2TB HDD</input></a>
+			<a id="btnDisk3D" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk4D" class="btn btn-default"><input type="radio" value="1">1x400GB SSD & 4x1.2TB HDD</input></a>
+			<a id="btnDisk5D" class="btn btn-default"><input type="radio" value="1">1x200GB SSD & 5x1.2TB HDD</input></a>
+			<a id="btnDisk6D" class="btn btn-default"><input type="radio" value="1">1x800GB SSD & 5x1.2TB HDD</input></a>
 		</div>
 	</div>
 </p>
@@ -367,7 +367,7 @@
 <p>
 	<div id="divQuantityD" style="display:none;">
 		Quantity<br />
-		<input type="number" min="0" max="16" style="width:100%" id="fldQuantityD" value="0"></input>
+		<input id="fldQuantityD" type="number" min="0" max="16" style="width:100%" value="0"></input>
 	</div>
 </p>
 </div></div></div></div>
@@ -376,7 +376,7 @@
 <div class ="row">
 	<div id="help6" class="col-lg-12" style="display:none;">
 		<span style="color:red;  font-weight:bold;">6. Cluster statistics are displayed in real-time.</span>
-		<button type="button" class="btn btn-danger" id="btnHelped" style="display:inline;">Got it.</button>
+		<button id="btnHelped" type="button" class="btn btn-danger" style="display:inline;">Got it.</button>
 </div></div></div><br />
 
 <!-- Statistics -->
@@ -453,6 +453,24 @@
 					<td><span id="tblCoresOverhead">21</span></td>
 					<td><span id="tblMemoryOverhead">48 GB</span></td>
 					<td><span id="tblStorageOverhead">775 GB</span></td>
+				</tr>
+				<tr id="dpOverhead" class ="danger" style="display:none;">
+					<td></td>
+					<td><span id="tblModelDP">Mirroring</span></td>
+					<td><span id="tblAppliancesDP">0</span></td>
+					<td><span id="tblNodesDP">0</span></td>
+					<td><span id="tblCoresDP">0</span></td>
+					<td><span id="tblMemoryDP">0 GB</span></td>
+					<td><span id="tblStorageDP">0 GB</span></td>
+				</tr>
+				<tr id="VSAN" class ="danger" style="display:none;">
+					<td></td>
+					<td><span id="tblModelVSAN">VSAN</span></td>
+					<td><span id="tblAppliancesVSAN">0</span></td>
+					<td><span id="tblNodesVSAN">0</span></td>
+					<td><span id="tblCoresVSAN">0</span></td>
+					<td><span id="tblMemoryVSAN">0 GB</span></td>
+					<td><span id="tblStorageVSAN">0 GB</span></td>
 				</tr>
 				<tr id="VCSA" class ="danger" style="display:none;">
 					<td></td>
@@ -571,7 +589,7 @@
 
 <!-- Footer -->
 <footer style="text-align:center">
-	Created by <a href="https://twitter.com/RichardWhiteIO">Richard White</a> using Bootstrap and jQuery.
+	Maintained by <a href="mailto:devops.dallas@emc.com">EMC Dallas Devops</a>.
 </footer>
 </body>
 </html>

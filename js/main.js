@@ -1,24 +1,39 @@
 $(document).ready(function(){
 
+function model(name, nodes, sockets, cores, ram, disk) {
+    this.applianceName = name,
+    this.applianceNodes = nodes,
+    this.nodeSockets = sockets,
+    this.socketCores = cores,
+    this.nodeRam = ram,
+    this.nodeDisk = disk
+    this.nodeCores = function() {return this.nodeSockets * this.socketCores};
+}
+
+var vxrail60 = new model("VxRail 60",4,1,6,[64],[[1,200,3,1200],[1,200,4,1200],[1,200,5,1200]]);
+var vxrail120 = new model("VxRail 120",4,2,6,[128,192],[[1,400,3,1200],[1,400,4,1200],[1,800,5,1200]]);
+var vxrail160 = new model("VxRail 160",4,2,8,[256,512],[[1,400,4,1200],[1,800,5,1200]]);
+var vxrail200 = new model("VxRail 200",4,2,10,[256,512],[[1,400,4,1200],[1,800,5,1200]]);
+
 var protect = 0; 
 var modelA = 0; var modelB = 0; var modelC = 0; var modelD = 0; 
 var coresA = 0; var coresB = 0; var coresC = 0; var coresD = 0;
-var coresVCSA = 4; var coresLog = 4; var coresManager = 2; var coresExtension = 2;
+var coresVSAN = 0; var coresVCSA = 4; var coresLog = 4; var coresManager = 2; var coresExtension = 2;
 var coresESRS = 1; var coresVDP = 4; var coresRPVM = 2; var coresCloud = 2;
 var memoryA = 0; var memoryB = 0; var memoryC = 0; var memoryD = 0;
-var memoryVCSA = 16; var memoryLog = 8; var memoryManager = 4; var memoryExtension = 4;
+var memoryVSAN = 0; var memoryVCSA = 16; var memoryLog = 8; var memoryManager = 4; var memoryExtension = 4;
 var memoryESRS = 4; var memoryVDP = 4; var memoryRPVM = 4; var memoryCloud = 4;
 var ssdCountA = 0; var ssdCountB = 0; var ssdCountC = 0; var ssdCountD = 0;
 var ssdCapA = 0; var ssdCapB = 0; var ssdCapC = 0; var ssdCapD = 0;
 var hddCountA = 0; var hddCountB = 0; var hddCountC = 0; var hddCountD = 0;
 var hddCapA = 0; var hddCapB = 0; var hddCapC = 0; var hddCapD = 0;
-var storageVCSA = 176; var storageLog = 137; var storageManager = 41; var storageExtension = 84;
+var storageDP = 0; var storageVSAN = 0; var storageVCSA = 176; var storageLog = 137; var storageManager = 41; var storageExtension = 84;
 var storageESRS = 68; var storageVDP = 104; var storageRPVM = 104; var storageCloud = 61;
 var quantityA = 0; var quantityB = 0; var quantityC = 0; var quantityD = 0;
 var coresOverhead = 21; var memoryOverhead = 48; var storageOverhead = 775;
 var coresUsable = 0; var memoryUsable= 0; var storageUsable = 0;
 var appliancesRaw = 0; var nodesRaw = 0; var coresRaw = 0; var memoryRaw = 0; var storageRaw = 0;
-var helped = 1;
+var helped = 1; var panelCount = 0; clusterType = "hybrid";
 
 	//Disable all-flash features.
 	$('#radCluster2').attr('disabled', true);
@@ -51,6 +66,35 @@ var helped = 1;
 		modelA = 0;
 		coresA = 0;
 	}
+
+	function createPanel() {
+		$('#hardwarePane').append('<div class ="panel' + panelCount + ' col-lg-3"></div>');
+		$('.panel' + panelCount).append('<div class="panelWrapper' + panelCount + ' panel panel-primary"></div');
+		$('.panelWrapper' + panelCount).append('<div class="panelHeading' + panelCount +' panel-heading"></div>');
+		$('.panelHeading' + panelCount).text('Appliance Details');
+		$('.panelHeading' + panelCount).append('<a class="panelMinus' + panelCount + ' glyphicon glyphicon-minus"></a>');
+		$('.panelHeading' + panelCount).append('<a class="panelPlus' + panelCount + ' glyphicon glyphicon-plus"></a>');
+		$('.panelWrapper' + panelCount).append('<div class="panelBody' + panelCount + ' panel-body"></div>');
+		$('.panelBody' + panelCount).append('<p>Model</p>');
+		$('.panelBody' + panelCount).append('<div class="grpModel' + panelCount + ' btn-group btn-group-justified" data-toggle="buttons">');
+		if(clusterType=="hybrid"){
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="60">60</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="120">120</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="160">160</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="200">200</input></a>');
+		}
+		else if(clusterType=="flash"){
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="120F">120F</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="160F">160F</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="200F">200F</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="240F">240F</input></a>');
+			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="280F">280F</input></a>');	
+		}
+		$('.panelMinus' + panelCount).on('click', function() {$(this).closest("div.col-lg-3").remove();});
+		$('.panelPlus' + panelCount).on('click', function() {panelCount++; createPanel();});
+	}
+
+	$('.panelMinus')
 	
 	function clearMemoryA() {
 		$('#btnMemory64A').removeClass('active');
@@ -292,6 +336,7 @@ var helped = 1;
 	function clearProtection(){
 		$('#radProtection1').removeClass('active');
 		$('#radProtection2').removeClass('active');
+		protect = 0;
 	}
 	
 	function updateStatsA(){
@@ -301,7 +346,7 @@ var helped = 1;
 		$('#tblCoresA').text(quantityA * 4 * coresA);
 		$('#tblMemoryA').text(quantityA * 4 * memoryA + ' GB');
 		$('#tblStorageA').text(quantityA * 4 * hddCountA * hddCapA + ' GB');
-		updateStatsRaw();
+		updateStats();
 	}
 	
 	function updateStatsB(){
@@ -311,7 +356,7 @@ var helped = 1;
 		$('#tblCoresB').text(quantityB * 4 * coresB);
 		$('#tblMemoryB').text(quantityB * 4 * memoryB + ' GB');
 		$('#tblStorageB').text(quantityB * 4 * hddCountB * hddCapB + ' GB');
-		updateStatsRaw();
+		updateStats();
 	}
 	
 	function updateStatsC(){
@@ -321,7 +366,7 @@ var helped = 1;
 		$('#tblCoresC').text(quantityC * 4 * coresC);
 		$('#tblMemoryC').text(quantityC * 4 * memoryC + ' GB');
 		$('#tblStorageC').text(quantityC * 4 * hddCountC * hddCapC + ' GB');
-		updateStatsRaw();
+		updateStats();
 	}
 	
 	function updateStatsD(){
@@ -331,72 +376,74 @@ var helped = 1;
 		$('#tblCoresD').text(quantityD * 4 * coresD);
 		$('#tblMemoryD').text(quantityD * 4 * memoryD + ' GB');
 		$('#tblStorageD').text(quantityD * 4 * hddCountD * hddCapD + ' GB');
-		updateStatsRaw();
-	}
-	
-	function updateStatsRaw(){
-		appliancesRaw = quantityA + quantityB + quantityC + quantityD;
-		nodesRaw = 4 * (quantityA + quantityB + quantityC + quantityD);
-		coresRaw = 4 * ((quantityA * coresA) + (quantityB * coresB) + (quantityC * coresC) + (quantityD * coresD));
-		memoryRaw = 4 * ((quantityA * memoryA) + (quantityB * memoryB) + (quantityC * memoryC) + (quantityD * memoryD));
-		storageRaw = 4 * ((quantityA * hddCountA * hddCapA) + (quantityB * hddCountB * hddCapB) + (quantityC * hddCountC * hddCapC) + (quantityD * hddCountD * hddCapD));
-		$('#tblAppliancesRaw').text(appliancesRaw);
-		$('#tblNodesRaw').text(nodesRaw);
-		$('#tblCoresRaw').text(coresRaw);
-		$('#tblMemoryRaw').text(memoryRaw + ' GB');
-		$('#tblStorageRaw').text(storageRaw + ' GB');
-		updateStatsUsable();
-	}
-
-	function updateStatsOverhead(){
-		coresOverhead = coresVCSA + coresLog + coresManager + coresExtension + coresESRS + coresVDP + coresRPVM + coresCloud;
-		memoryOverhead =  memoryVCSA + memoryLog + memoryManager + memoryExtension + memoryESRS + memoryVDP + memoryRPVM + memoryCloud;
-		storageOverhead =  storageVCSA + storageLog + storageManager + storageExtension + storageESRS + storageVDP + storageRPVM + storageCloud;
-		$('#tblCoresOverhead').text(coresOverhead);
-		$('#tblMemoryOverhead').text(memoryOverhead + ' GB');
-		$('#tblStorageOverhead').text(storageOverhead + ' GB');
-		updateStatsRaw();
+		updateStats();
 	}
 
 	function updateStatsESRS(){
 		$('#tblCoresESRS').text(coresESRS);
 		$('#tblMemoryESRS').text(memoryESRS + ' GB');
 		$('#tblStorageESRS').text(storageESRS + ' GB');
-		updateStatsOverhead();
+		updateStats();
 	}
 
 	function updateStatsVDP(){
 		$('#tblCoresVDP').text(coresVDP);
 		$('#tblMemoryVDP').text(memoryVDP + ' GB');
 		$('#tblStorageVDP').text(storageVDP + ' GB');
-		updateStatsOverhead();
+		updateStats();
 	}
 
 	function updateStatsRPVM(){
 		$('#tblCoresRPVM').text(coresRPVM);
 		$('#tblMemoryRPVM').text(memoryRPVM + ' GB');
 		$('#tblStorageRPVM').text(storageRPVM + ' GB');
-		updateStatsOverhead();
+		updateStats();
 	}
 
 	function updateStatsCloudArray(){
 		$('#tblCoresCloud').text(coresCloud);
 		$('#tblMemoryCloud').text(memoryCloud + ' GB');
 		$('#tblStorageCloud').text(storageCloud + ' GB');
-		updateStatsOverhead();
+		updateStats();
 	}
 
-	function updateStatsUsable(){
+	function updateStats(){
+		appliancesRaw = quantityA + quantityB + quantityC + quantityD;
+		nodesRaw = 4 * (quantityA + quantityB + quantityC + quantityD);
+		coresRaw = 4 * ((quantityA * coresA) + (quantityB * coresB) + (quantityC * coresC) + (quantityD * coresD));
+		memoryRaw = 4 * ((quantityA * memoryA) + (quantityB * memoryB) + (quantityC * memoryC) + (quantityD * memoryD));
+		storageRaw = 4 * ((quantityA * hddCountA * hddCapA) + (quantityB * hddCountB * hddCapB) + (quantityC * hddCountC * hddCapC) + (quantityD * hddCountD * hddCapD));
+		storageDP = storageRaw / protect;
+		coresVSAN = Math.ceil(coresRaw * .1);
+		memoryVSAN = Math.ceil(memoryRaw * .1);
+		storageVSAN = Math.ceil(storageDP * .01);
+		coresOverhead = coresVSAN + coresVCSA + coresLog + coresManager + coresExtension + coresESRS + coresVDP + coresRPVM + coresCloud;
+		memoryOverhead =  memoryVSAN + memoryVCSA + memoryLog + memoryManager + memoryExtension + memoryESRS + memoryVDP + memoryRPVM + memoryCloud;
+		storageOverhead = storageDP + storageVSAN + storageVCSA + storageLog + storageManager + storageExtension + storageESRS + storageVDP + storageRPVM + storageCloud;
 		coresUsable = coresRaw - coresOverhead;
 		memoryUsable = memoryRaw - memoryOverhead;
 		storageUsable = storageRaw - storageOverhead;
+		$('#tblAppliancesRaw').text(appliancesRaw);
+		$('#tblNodesRaw').text(nodesRaw);
+		$('#tblCoresRaw').text(coresRaw);
+		$('#tblMemoryRaw').text(memoryRaw + ' GB');
+		$('#tblStorageRaw').text(storageRaw + ' GB');
+		$('#tblStorageDP').text(storageDP + ' GB');
+		$('#tblCoresVSAN').text(coresVSAN);
+		$('#tblMemoryVSAN').text(memoryVSAN + ' GB');
+		$('#tblStorageVSAN').text(storageVSAN + ' GB');
+		$('#tblCoresOverhead').text(coresOverhead);
+		$('#tblMemoryOverhead').text(memoryOverhead + ' GB');
+		$('#tblStorageOverhead').text(storageOverhead + ' GB');
 		$('#tblAppliancesUsable').text(appliancesRaw);
 		$('#tblNodesUsable').text(nodesRaw);
 		$('#tblCoresUsable').text(coresUsable);
-		$('#tblMemoryUsable').text(memoryUsable + 'GB');
-		$('#tblStorageUsable').text(storageUsable + 'GB');
+		$('#tblMemoryUsable').text(memoryUsable + ' GB');
+		$('#tblStorageUsable').text(storageUsable + ' GB');
 	}
 	
+	createPanel();
+
 	//Event handler for 'Cluster Type' radio buttons.
 	$('#radCluster1').click(function(){
 		if (helped == 0) {
@@ -417,7 +464,7 @@ var helped = 1;
 			$('#minusPanel1').hide();
 		}
 		$('#divConfiguration').slideDown();
-		$('#divPanel1').slideDown();
+		$('.divPanel1').slideDown();
 		
 		protect = 2;
 	});
@@ -1775,7 +1822,7 @@ var helped = 1;
 		clearA();clearB();clearC();clearD();clearCluster();clearProtection();
 		$('#divProtection').slideUp();
 		$('#divConfiguration').slideUp();
-		$('#divPanel1').slideUp();
+		$('.divPanel1').slideUp();
 		$('#divPanel2').slideUp();
 		$('#divPanel3').slideUp();
 		$('#divPanel4').slideUp();
@@ -1798,7 +1845,7 @@ var helped = 1;
 		clearA();clearB();clearC();clearD();clearCluster();clearProtection();
 		$('#divProtection').slideUp();
 		$('#divConfiguration').slideUp();
-		$('#divPanel1').slideUp();
+		$('.divPanel1').slideUp();
 		$('#divPanel2').slideUp();
 		$('#divPanel3').slideUp();
 		$('#divPanel4').slideUp();
@@ -1806,6 +1853,8 @@ var helped = 1;
 	});
 
 	$('#downArrow').click(function(){
+		$('#dpOverhead').slideDown();
+		$('#VSAN').slideDown();
 		$('#VCSA').slideDown();
 		$('#logInsight').slideDown();
 		$('#railManager').slideDown();
@@ -1819,6 +1868,8 @@ var helped = 1;
 	});
 
 	$('#upArrow').click(function(){
+		$('#dpOverhead').slideUp();
+		$('#VSAN').slideUp();
 		$('#VCSA').slideUp();
 		$('#logInsight').slideUp();
 		$('#railManager').slideUp();
@@ -1914,6 +1965,4 @@ var helped = 1;
 	$('#btnDisclaimer').click(function(){
 		$('#disclaimer').slideUp();
 	});
-
-	alert("I was informed this morning that protection overhead was not being calculated. I will fix this after the Quantum Leap event.");
 });
