@@ -3,3 +3,11 @@
 	text-decoration: none;
 	float: right;
 }
+
+.btn-group-vertical {
+	width:100%;
+}
+
+.grpMem {
+	width:100%;
+}

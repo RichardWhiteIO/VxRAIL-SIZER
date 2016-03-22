@@ -10,6 +10,8 @@ function model(name, nodes, sockets, cores, ram, disk) {
     this.nodeCores = function() {return this.nodeSockets * this.socketCores};
 }
 
+var models = [];
+
 var vxrail60 = new model("VxRail 60",4,1,6,[64],[[1,200,3,1200],[1,200,4,1200],[1,200,5,1200]]);
 var vxrail120 = new model("VxRail 120",4,2,6,[128,192],[[1,400,3,1200],[1,400,4,1200],[1,800,5,1200]]);
 var vxrail160 = new model("VxRail 160",4,2,8,[256,512],[[1,400,4,1200],[1,800,5,1200]]);
@@ -68,34 +70,52 @@ var helped = 1; var panelCount = 0; clusterType = "hybrid";
 	}
 
 	function createPanel() {
-		$('#hardwarePane').append('<div class ="panel' + panelCount + ' col-lg-3"></div>');
+		models[panelCount] = new model("",0,0,0,0,0);
+		$('#hardwarePane').append('<div class ="panel' + panelCount + ' panel col-lg-4"></div>');
 		$('.panel' + panelCount).append('<div class="panelWrapper' + panelCount + ' panel panel-primary"></div');
-		$('.panelWrapper' + panelCount).append('<div class="panelHeading' + panelCount +' panel-heading"></div>');
+		$('.panelWrapper' + panelCount).append('<div class="panelHeading' + panelCount + ' panel-heading"></div>');
 		$('.panelHeading' + panelCount).text('Appliance Details');
 		$('.panelHeading' + panelCount).append('<a class="panelMinus' + panelCount + ' glyphicon glyphicon-minus"></a>');
 		$('.panelHeading' + panelCount).append('<a class="panelPlus' + panelCount + ' glyphicon glyphicon-plus"></a>');
 		$('.panelWrapper' + panelCount).append('<div class="panelBody' + panelCount + ' panel-body"></div>');
-		$('.panelBody' + panelCount).append('<p>Model</p>');
-		$('.panelBody' + panelCount).append('<div class="grpModel' + panelCount + ' btn-group btn-group-justified" data-toggle="buttons">');
 		if(clusterType=="hybrid"){
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="60">60</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="120">120</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="160">160</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="200">200</input></a>');
+			$('.panelBody' + panelCount).append('<h5>Model</h5>');
+			$('.panelBody' + panelCount).append('<div class="grpModel' + panelCount + ' grpModel btn-group btn-group-justified" data-toggle="buttons">');
+				$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default">60</a>');
+				$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default">120</a>');
+				$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default">160</a>');
+				$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default">200</a>');
+			$('.panelBody' + panelCount).append('<h5>Memory</h5>');
+			$('.panelBody' + panelCount).append('<div class="grpMem' + panelCount + ' grpMem btn-group btn-group-justified" data-toggle="buttons">');
+				$('.grpMem' + panelCount).append('<a class="radMem' + panelCount + ' btn btn-default">64</a>');
+				$('.grpMem' + panelCount).append('<a class="radMem' + panelCount + ' btn btn-default">128</a>');
+				$('.grpMem' + panelCount).append('<a class="radMem' + panelCount + ' btn btn-default">192</a>');
+				$('.grpMem' + panelCount).append('<a class="radMem' + panelCount + ' btn btn-default">256</a>');
+				$('.grpMem' + panelCount).append('<a class="radMem' + panelCount + ' btn btn-default">512</a>');
+			$('.panelBody' + panelCount).append('<h5>Disk Packs</h5>');
+			$('.panelBody' + panelCount).append('<div class="grpDisk' + panelCount + ' grpDisk btn-group-vertical" data-toggle="buttons">');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x200GB SSD & 3x1.2TB HDD</a>');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x400GB SSD & 3x1.2TB HDD</a>');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x200GB SSD & 4x1.2TB HDD</a>');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x400GB SSD & 4x1.2TB HDD</a>');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x200GB SSD & 5x1.2TB HDD</a>');
+				$('.grpDisk' + panelCount).append('<a class="radDisk' + panelCount + ' btn btn-default">1x800GB SSD & 5x1.2TB HDD</a>');
 		}
-		else if(clusterType=="flash"){
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="120F">120F</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="160F">160F</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="200F">200F</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="240F">240F</input></a>');
-			$('.grpModel' + panelCount).append('<a class="radModel' + panelCount + ' btn btn-default"><input type="radio" value="280F">280F</input></a>');	
-		}
-		$('.panelMinus' + panelCount).on('click', function() {$(this).closest("div.col-lg-3").remove();});
+		$('.grpModel' + panelCount + ' a').on('click', function() {
+			$(this).parent().find('a').removeClass('active btn-primary');
+			$(this).parent().nextAll('div.grpMem:first').find('a').removeClass('active btn-primary');
+			$(this).parent().nextAll('div.grpDisk:first').find('a').removeClass('active btn-primary');
+			$(this).parent().nextAll('div.grpMem:first').find('a').attr('disabled', true);
+			$(this).parent().nextAll('div.grpDisk:first').find('a').attr('disabled', true);
+			$(this).addClass('btn-primary active');
+			
+		});
+		$('.panelMinus' + panelCount).on('click', function() {$(this).closest("div.col-lg-4").remove();});
 		$('.panelPlus' + panelCount).on('click', function() {panelCount++; createPanel();});
 	}
 
 	$('.panelMinus')
-	
+
 	function clearMemoryA() {
 		$('#btnMemory64A').removeClass('active');
 		$('#btnMemory128A').removeClass('active');
