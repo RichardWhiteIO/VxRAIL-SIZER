@@ -1914,4 +1914,8 @@ var helped = 1;
 	$('#btnDisclaimer').click(function(){
 		$('#disclaimer').slideUp();
 	});
+
+	alert('VxRailSizer is down, but not forever!' + '\n\n' +
+		'I\'m collaborating with product management to make it bigger, badder, and more official.' + '\n\n' +
+		'Until then, please use the official sizing tool.');
 });
