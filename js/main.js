@@ -1914,6 +1914,4 @@ var helped = 1;
 	$('#btnDisclaimer').click(function(){
 		$('#disclaimer').slideUp();
 	});
-
-	alert("I was informed this morning that protection overhead was not being calculated. I will fix this after the Quantum Leap event.");
 });
